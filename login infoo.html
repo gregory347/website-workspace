@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goCode</title>
+    <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/image/pexel6.jpg');
+            background-size: cover;
+            background-position: right;
+            background-repeat: no-repeat;
+            color: black;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            padding: 20px;
+            background-color: none;
+            color: black;
+            text-align: center;
+            position: relative;
+        }
+
+        nav {
+            background-color: rgb(1, 8, 20);
+            color: #1dd849;
+            width: 220px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto; 
+            padding-top: 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 20px 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #d1d716;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav ul li a i {
+            margin-right: 10px;
+        }
+
+        nav ul li a:hover {
+            background-color: #780bf5;
+            color: rgb(1, 8, 19);
+        }
+
+        main {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .content-section {
+            display: none;
+            padding: 10px;
+            background-color: #1c1c1c;
+            margin: 10px 20px; 
+            border-radius: 5px;
+            color: #fff; 
+        }
+
+        footer {
+            text-align: center;
+            color: rgb(13, 13, 235);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 9px;
+            padding: 2px;
+        }
+
+        .main-word {
+            text-align: center;
+        }
+
+        span {
+            font-size: 25px;
+        }
+
+        .form-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            background: rgb(27, 179, 225);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(40, 2, 205, 0.1);
+        }
+
+        table {
+            width: 100%;
+        }
+
+        label {
+            margin-left: 10px;
+        }
+
+        input[type="text"], input[type="password"] {
+            margin-right: 10px;
+            width: calc(100% - 20px);
+            height: 20px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        #your-color {
+            color: black;
+            font-size: 20px;
+        }
+
+        .special {
+            text-align: center;
+        }
+
+        button {
+            border: none;
+            background-color: rgb(3, 41, 20);
+            color: rgb(16, 85, 235);
+            width: 100%;
+            height: 25px;
+            margin-top: 10px;
+        }
+
+        #middle {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .icons {
+            text-align: center;
+            border: 2px solid rgb(220, 220, 220);
+            line-height: 21px;
+            margin: 20px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        i {
+            margin: 10px;
+        }
+
+        .hamburger, .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 21px;
+        }
+
+        .hamburger div, .close-btn div {
+            width: 30px;
+            height: 3px;
+            background-color: rgb(72, 237, 27);
+        }
+
+        .close-btn div {
+            transform: rotate(45deg);
+            margin-top: -5px;
+        }
+
+        .close-btn div:last-child {
+            transform: rotate(-45deg);
+        }
+
+        .open {
+            transform: translateX(0);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                transform: translateX(-100%);
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav.open {
+                transform: translateX(0);
+            }
+        }
+
+        #services ul {
+            padding: 0;
+            list-style-type: none;
+        }
+
+        #services ul li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #333;
+            color: #18b2d9;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #services ul li:hover {
+            background-color: #5e615e;
+        }
+
+        .error-message {
+            color: black;
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="hamburger" id="hamburger" onclick="toggleNav()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <marquee direction="left">WELCOME TO goCode</marquee>
+        <h1>&lt;goCode&gt;</h1>
+    </header>
+    <nav id="sidebar">
+        <div class="close-btn hidden" id="closeBtn" onclick="toggleNav()">
+            <div></div>
+            <div></div>
+        </div>
+        <ul>
+            <li><a href="#" onclick="toggleContent('home')"><i class="fas fa-home"></i> HOME</a></li>
+            <div id="home" class="content-section">
+                <h2>Home</h2>
+                <p>Welcome to goCode.</p>
+            </div>
+            <li><a href="#" onclick="toggleContent('notifications')"><i class="fas fa-bell"></i> NOTIFICATIONS</a></li>
+            <div id="notifications" class="content-section">
+                <h2>Notifications</h2>
+                <p>Here are your notifications.</p>
+            </div>
+            <li><a href="#" onclick="toggleContent('services')"><i class="fas fa-concierge-bell"></i> SERVICES</a></li>
+            <div id="services" class="content-section">
+                <h2>Services</h2>
+                <ul>
+                    <li>Front-end development</li>
+                    <li>Back-end development</li>
+                    <li>Coding assignments for students</li>
+                    <li>Web development</li>
+                    <li>UI/UX design</li>
+                    <li>Mobile Android development</li>
+                    <li>Graphic design</li>
+                </ul>
+            </div>
+            <li><a href="#" onclick="toggleContent('settings')"><i class="fas fa-cog"></i> SETTINGS</a></li>
+            <div id="settings" class="content-section">
+                <h2>Settings</h2>
+                <p>Adjust your preferences here.</p>
+            </div>
+            <li><a href="#" onclick="toggleContent('help')"><i class="fas fa-question-circle"></i> HELP</a></li>
+            <div id="help" class="content-section">
+                <h2>Help</h2>
+                <p>How can we assist you?</p>
+            </div>
+        </ul>
+    </nav>
+    <main>
+        <div class="form-container">
+            <form id="login-form" action="send/php/" method="post" title="LOGIN-page">
+                <div class="main-word">
+                    <span>LOGIN </span>
+                    <p>DONT HAVE AN ACCOUNT? <span id="your-color"><b>CREATE ACCOUNT AND SIGN UP</b></span></p>
+                </div>
+                <table>
+                    <tr>
+                        <td><label for="email">Email</label></td>
+                        <td><input type="text" id="email" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Password</label></td>
+                        <td>
+                            <input type="password" id="password" name="password" required>
+                        </td>
+                    </tr>
+                </table>
+                <div class="special">
+                    <button type="submit" value="Login" title="login-page">Login</button>
+                    <div id="middle">--------------- OR ---------------</div>
+                </div>
+                <div class="icons">
+                    <p><a href="/auth/google"><i class="fab fa-google fa-lg" style="color: blueviolet;"></i> Continue with Google</a></p>
+                    <p><a href="/auth/facebook"><i class="fab fa-facebook fa-lg" style="color: blue;"></i> Sign in with Facebook</a></p>
+                    <p><a href="/auth/linkedin"><i class="fab fa-linkedin fa-lg" style="color: chartreuse;"></i> Sign in with LinkedIn</a></p>
+                </div>
+                <p id="error-message" class="error-message">Password must contain at least 8 characters.</p>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 All RIGHTS RESERVED.</p>
+    </footer>
+    <script>
+        function toggleNav() {
+            var sidebar = document.getElementById('sidebar');
+            var hamburger = document.getElementById('hamburger');
+            var closeBtn = document.getElementById('closeBtn');
+            sidebar.classList.toggle('open');
+            hamburger.classList.toggle('hidden');
+            closeBtn.classList.toggle('hidden');
+        }
+
+        function toggleContent(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === 'block') {
+                section.style.display = 'none';
+            } else {
+                section.style.display = 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initially hide all content sections
+            var sections = document.querySelectorAll('.content-section');
+            sections.forEach(function (section) {
+                section.style.display = 'none';
+            });
+
+            // Password validation
+            var loginForm = document.getElementById('login-form');
+            var passwordField = document.getElementById('password');
+            var errorMessage = document.getElementById('error-message');
+
+            loginForm.addEventListener('submit', function (event) {
+                if (passwordField.value.length < 8) {
+                    event.preventDefault();
+                    errorMessage.style.display = 'block';
+                } else {
+                    errorMessage.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
